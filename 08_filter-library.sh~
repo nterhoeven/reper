@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#chloro
+blastn -query Trinity.fasta -db /shelf/genomics/projects/dmuscipula/chloroplast/chloro_gene_database/eudicot/all_CDS.fa -evalue 1e-3 -num_threads 24 -outfmt 7 -out Trinity.fasta_vs_chloro.bls
+
+#mito
+blastn -query Trinity.fasta -db /storage/genomics/projects/dmuscipula/mitochondrion/references/genomes/streptophyta_mitoDB.fasta -evalue 1e-3 -num_threads 24 -outfmt 7 -out Trinity.fasta_vs_mito.bls
