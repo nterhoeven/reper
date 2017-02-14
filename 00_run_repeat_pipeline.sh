@@ -19,29 +19,28 @@ STARTJOB="$1"
 
 ## run scripts
 case "$STARTJOB" in
-    jelly) sbatch -c "$MAXTHREADS" ./01_Jellyfish.sh
+    jelly) ./01_Jellyfish.sh
 	exit 0
 	;;
-    kmerFilter) sbatch ./02_Kmer-filter.sh
+    kmerFilter) ./02_Kmer-filter.sh
 	exit 0
 	;;
-    Trinity)
-	sbatch -c "$MAXTHREADS" ./03_Trinity.sh "$FILTEROUT"_1.fq "$FILTEROUT"_2.fq
+    Trinity) ./03_Trinity.sh "$FILTEROUT"_1.fq "$FILTEROUT"_2.fq
 	exit 0
 	;;
-    cluster) sbatch -c "$MAXTHREADS" ./04_cd-hit.sh 
+    cluster) ./04_cd-hit.sh 
 	exit 0
 	;;
-    classify) sbatch ./05_Classifier.sh
+    classify) ./05_Classifier.sh
 	exit 0
 	;;
-    quantify) sbatch -c "$MAXTHREADS" ./06_Bowtie.sh 
+    quantify) ./06_Bowtie.sh 
 	exit 0
 	;;
-    landscape) sbatch ./07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
+    landscape) ./07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 	exit 0
 	;;
-    filtering) sbatch -c "$MAXTHREADS" ./08_filter-library.sh
+    filtering) ./08_filter-library.sh
 	exit 0
 	;;
 
