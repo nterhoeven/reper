@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source repeat_pipeline.cfg
+source reper.conf
 
-IN1=$1
-IN2=$2
+IN1="$FILTEROUT"_1.fq
+IN2="$FILTEROUT"_2.fq
 
 "$trinity" --seqType fq --JM "$MAXMEMORY" --left "$IN1" --right "$IN2"  --CPU "$MAXTHREADS"
 
 echo "################################"
 echo "assembly finished --> run cd-hit"
 ln -s ./trinity_out_dir/Trinity.fasta                                                                                                                        
-./00_run_repeat_pipeline.sh cluster
+"$reperDir"/reper cluster

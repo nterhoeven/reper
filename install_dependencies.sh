@@ -9,6 +9,7 @@
 # - blastn
 # - RepeatMasker (Classifier script)
 # - Thomas KmerFilter script
+# - databases for classification
 #####################################################
 reperDir=$(pwd)
 dep="$reperDir/dep"
