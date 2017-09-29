@@ -77,15 +77,23 @@ cd samtools
 wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1.tar.bz2
 tar xjf samtools-1.4.1.tar.bz2
 
-#remove conflicting dependency lzma.h
-cd samtools-1.4.1/htslib-1.4.1/
-make distclean
-./configure --disable-lzma
-make
-cd ..
-make distclean
-#install samtools
-make
+# #remove conflicting dependency lzma.h
+# cd samtools-1.4.1/htslib-1.4.1/
+# make distclean
+# ./configure --disable-lzma
+# make
+# cd ..
+# make distclean
+# #install samtools
+# make
+# make prefix=$(pwd) install
+
+
+## from readme
+#./configure --enable-plugins --enable-libcurl --without-curses --disable-lzma --with-plugin-path=$PWD/htslib-1.4.1
+# fixed version - disabled some features
+./configure --enable-plugins --enable-libcurl --without-curses --disable-bz2 --disable-lzma --disable-libcurl --with-plugin-path=$PWD/htslib-1.4
+make all plugins-htslib
 make prefix=$(pwd) install
 
 cd "$dep"
@@ -106,5 +114,16 @@ echo "Installing kmer-filter"
 
 mkdir kmer-filter
 cd kmer-filter
-wget https://github.com/thackl/kmer-scripts/blob/master/bin/kmer-filter
 
+wget https://github.com/thackl/kmer-scripts/archive/master.zip
+unzip master.zip
+
+mkdir perl-modules
+cd perl-modules
+wget http://search.cpan.org/CPAN/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz
+tar xzf Log-Log4perl-1.49.tar.gz
+cd Log-Log4perl-1.49/
+perl Makefile.PL
+make
+make test
+export PERL5LIB="$dep/kmer-filter/perl-modules/Log-Log4perl-1.49/lib":$PERL5LIB
