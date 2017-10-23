@@ -8,6 +8,7 @@
 
 
 ## read config
+export reperDir="$PWD"
 source reper.conf
 ulimit -v "$maxMemoryKB"
 
@@ -37,10 +38,10 @@ case "$nextJob" in
     landscape) "$scrDir"/07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 	       exit 0
 	       ;;
-    configure-REdat) "scrDir"/configure-REdat.sh
+    configure-REdat) "$scrDir"/configure-REdat.sh
 		     exit 0
 		     ;;
-    configure-repbase) "$scrDir"/configure-repbase.sh
+    configure-repbase) perl "$scrDir"/configure-repbase.pl $2 $3 $4
 		       exit 0
 		       ;;
     *) echo "$STARTJOB is not a valid job name!"

@@ -19,7 +19,7 @@ while(<IN>)
 
     my$id=$line[0];
 
-    (my$class)=$line[1]=~/^.+\|.+\|(.+)\|.+\|.+\|.+/;
+    (my$class)=$line[1]=~/^.+\|(.+)\|.+/;
     my$evalue=$line[10];
 
     if($evalue<=1e-3)
