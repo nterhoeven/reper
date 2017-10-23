@@ -37,10 +37,16 @@ case "$nextJob" in
     landscape) "$scrDir"/07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 	       exit 0
 	       ;;
+    configure-REdat) "scrDir"/configure-REdat.sh
+		     exit 0
+		     ;;
+    configure-repbase) "$scrDir"/configure-repbase.sh
+		       exit 0
+		       ;;
     *) echo "$STARTJOB is not a valid job name!"
-	echo "please select one of the following:"
-	echo "jelly, kmerFilter, Trinity, cluster, classify, quantify, landscape"
-	exit 1
-	;;
+       echo "please select one of the following:"
+       echo "jelly, kmerFilter, Trinity, cluster, classify, quantify, landscape"
+       exit 1
+       ;;
 esac
 
