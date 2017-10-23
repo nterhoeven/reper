@@ -16,28 +16,27 @@ nextJob="$1"
 
 ## run scripts
 case "$nextJob" in
-    jelly) "$reperDir"/scripts/01_Jellyfish.sh
-	exit 0
-	;;
-    kmerFilter) "$reperDir"/scripts/02_Kmer-filter.sh
-	exit 0
-	;;
-    Trinity) "$reperDir"/scripts/03_Trinity.sh
-	exit 0
-	;;
-    cluster) "$reperDir"/scripts/04_cd-hit.sh 
-	exit 0
-	;;
-    classify) "$reperDir"/scripts/05_Classifier.sh
-	exit 0
-	;;
-    quantify) "$reperDir"/scripts/06_Bowtie.sh 
-	exit 0
-	;;
-    landscape) "$reperDir"/scripts/07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
-	exit 0
-	;;
-
+    jelly) "$scrDir"/01_Jellyfish.sh
+	   exit 0
+	   ;;
+    kmerFilter) "$scrDir"/02_Kmer-filter.sh
+		exit 0
+		;;
+    Trinity) "$scrDir"/03_Trinity.sh
+	     exit 0
+	     ;;
+    cluster) "$scrDir"/04_cd-hit.sh 
+	     exit 0
+	     ;;
+    classify) "$scrDir"/05_Classifier.sh
+	      exit 0
+	      ;;
+    quantify) "$scrDir"/06_Bowtie.sh 
+	      exit 0
+	      ;;
+    landscape) "$scrDir"/07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
+	       exit 0
+	       ;;
     *) echo "$STARTJOB is not a valid job name!"
 	echo "please select one of the following:"
 	echo "jelly, kmerFilter, Trinity, cluster, classify, quantify, landscape"
