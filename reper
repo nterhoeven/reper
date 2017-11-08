@@ -41,6 +41,9 @@ case "$nextJob" in
     configure-REdat) "$scrDir"/configure-REdat.sh
 		     exit 0
 		     ;;
+    configure-refseq) "$scrDir"/configure-refseq.sh
+		     exit 0
+		     ;;
     configure-repbase) perl "$scrDir"/configure-repbase.pl $2 $3 $4
 		       exit 0
 		       ;;
