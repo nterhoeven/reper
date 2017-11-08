@@ -10,6 +10,7 @@ ulimit -v "$maxMemoryKB"
 
 #analyse blast results
 
+perl classification_blast-parser.pl "$CLUSTEROUT" "$CLASSIFYOUT" "$CLUSTEROUT"_class.bls "$CLUSTEROUT"_chloro.bls "$CLUSTEROUT"_mito.bls
 
 echo "###################################"
 echo "finished classification -running quantification"

@@ -3,48 +3,78 @@
 use strict;
 use warnings;
 
-my$blsFile=shift(@ARGV);
+my$fastaFile=shift(@ARGV);
+my$outFile=shift(@ARGV);
+my@blsFiles=@ARGV;
 
 my%final;
 my%high;
 my%medium;
 my%low;
 
-open(IN,'<',$blsFile) or die $!;
-while(<IN>)
+foreach my$file (@blsFiles)
 {
-    next if $_=~/^#/;
-
-    my@line=split(/\s+/,$_);
-
-    my$id=$line[0];
-
-    (my$class)=$line[1]=~/^.+\|(.+)\|.+/;
-    my$evalue=$line[10];
-
-    if($evalue<=1e-3)
+    open(IN,'<',$file) or die $!;
+    while(<IN>)
     {
-	$high{$id}{$class}++;
+	next if $_=~/^#/;
+	
+	my@line=split(/\s+/,$_);
+	
+	my$id=$line[0];
+	
+	(my$class)=$line[1]=~/^.+\|(.+)\|.+/;
+	my$evalue=$line[10];
+	
+	if($evalue<=1e-3)
+	{
+	    $high{$id}{$class}++;
+	}
+	elsif($evalue<=1)
+	{
+	    $medium{$id}{$class}++;
+	}
+	else
+	{
+	    $low{$id}{$class}++;
+	}
     }
-    elsif($evalue<=1)
-    {
-    	$medium{$id}{$class}++;
-    }
-    else
-    {
-	$low{$id}{$class}++;
-    }
+    close IN or die $!;
 }
-close IN or die $!;
+
 
 &find_best(\%high,"high");
 &find_best(\%medium,"medium");
 &find_best(\%low,"low");
 
-foreach my$id (keys %final)
+open(FASTA,'<',$fastaFile) or die $!;
+open(OUT,'>',$outFile) or die $!;
+while(<FASTA>)
 {
-    print join("\t",$id,$final{$id}{"class"},$final{$id}{"confidence"}),"\n";
+    if($_=~/^>/)
+    {
+	chomp;
+	my$class;
+	my($id)=$_=~/>(\S+)/;
+	if(exists $final{$id})
+	{
+	    $class=$final{$id}{"class"}
+	}
+	else
+	{
+	    $class="Unknown"
+	}
+
+	print OUT $_,"#",$class,"\n";
+	
+    }
+    else
+    {
+	print OUT $_
+    }
 }
+close OUT or die $!;
+close FASTA or die $!
 
 sub find_best
 {
