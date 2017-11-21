@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 RUN apt-get update && apt-get -y dist-upgrade && apt-get -y install wget g++ build-essential unzip libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libtbb-dev git libipc-run-perl python
 
 ENV reperDir /reper
-ENV depDir /reper/dependencies
+ENV depDir /dependencies
 
 WORKDIR $reperDir
 COPY reper .
@@ -28,6 +28,9 @@ RUN wget http://search.cpan.org/CPAN/authors/id/P/PL/PLICEASE/File-Which-1.21.ta
 RUN git clone https://github.com/thackl/perl5lib-Kmer.git && mv perl5lib-Kmer/lib/* .
 RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Verbose.git && mv perl5lib-Verbose/lib/* .
 
+WORKDIR $reperDir
 
+RUN chmod -R ga+rwX $reperDir
+RUN chmod -R ga+rwX $depDir
 
-CMD reper help
+ENTRYPOINT reper help
