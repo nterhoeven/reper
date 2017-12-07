@@ -182,7 +182,7 @@ $L->info("Checking binaries");
 my$samtools=$opt{samtools};
 $samtools = bin("samtools") unless $opt{samtools};
 $L->debug("found samtools at $samtools");
-check_binary($samtools, ["--version", "1.1"]);
+check_binary($samtools, ["--version", "1.1.1"]);
 
 ##------------------------------------------------------------------------##
 
@@ -219,13 +219,13 @@ while(<CLSTR>)
     foreach my$line (@obj)
     {
 	# get ID of head sequence -> neccessary to assign a class
-	($headID)=$line=~/>(c.*)\.{3}/ if $line=~/\*\s*$/;
+	($headID)=$line=~/>(TRINITY.*)\.{3}/ if $line=~/\*\s*$/;
     }
     foreach my$seq (@obj)
     {
 	#loop through sequences in cluster to extract length and IDs
 	#and write all to the clstr hash
-	(my$seqID)=$seq=~/>(c.*)\.{3}/;
+	(my$seqID)=$seq=~/>(TRINITY.*)\.{3}/;
 	(my$length)=$seq=~/(\d+)nt/;
 	my$head=0;
 	$head=1 if $seqID eq $headID;
@@ -333,39 +333,41 @@ foreach my$clstrID (keys%clstr)
 	# set count to 0 if the sequence has no count field (did not occur in the bam file.)
 	# use defined here, because the value is undef, which leads exists to evaluate true
 	$clstr{$clstrID}{$seqID}{'count'}=0 unless defined $clstr{$clstrID}{$seqID}{'count'};
-	
+	$class=$clstr{$clstrID}{$seqID}{'class'};	
 
+	next if $class eq "mitochondrion" || $class eq "chloroplast"; #skip mito and chloro in output. The numbers here are not meaningful in comparison to the core genome and the repeat parts of the genome.
+	
 	#print by sequence
 	print BYSEQ join("\t", $seqID,
 			 $clstr{$clstrID}{$seqID}{'count'},
 			 $clstr{$clstrID}{$seqID}{'length'},
 			 sprintf("%.2f",(($clstr{$clstrID}{$seqID}{'count'}/$opt{coverage})*$opt{readLength})/(10**3)),
 			 $clstrID,
-			 $clstr{$clstrID}{$seqID}{'class'}),"\n";
+			 $class),"\n";
 
 	#calculate metrics for output by cluster
 	$sumCounts+=$clstr{$clstrID}{$seqID}{'count'};
 	$sizeBp+=$clstr{$clstrID}{$seqID}{'length'};
 	$sizeSeqs++;
 	$L->logdie("no distinct class found for cluster ",$clstrID) if $class && $class ne $clstr{$clstrID}{$seqID}{'class'};
-	$class=$clstr{$clstrID}{$seqID}{'class'};
+
 
 	#fill classes hash for printing by class
-	if($clstr{$clstrID}{$seqID}{'class'}=~/^DNA/)
+	if($class=~/^DNA/)
 	{
 	    $classes{'DNA'}{'count'}+=$clstr{$clstrID}{$seqID}{'count'};
 	    $classes{'DNA'}{'numBp'}+=$clstr{$clstrID}{$seqID}{'length'};
 	    $classes{'DNA'}{'numSeqs'}++;
 	}
- 	elsif($clstr{$clstrID}{$seqID}{'class'}=~/^LTR/)
+ 	elsif($class=~/^LTR/)
 	{
-	    if($clstr{$clstrID}{$seqID}{'class'} eq 'LTR/Copia')
+	    if($class eq 'LTR/Copia')
 	    {
 		$classes{'LTR/Copia'}{'count'}+=$clstr{$clstrID}{$seqID}{'count'};
 	    $classes{'LTR/Copia'}{'numBp'}+=$clstr{$clstrID}{$seqID}{'length'};
 	    $classes{'LTR/Copia'}{'numSeqs'}++;
 	    }
-	    elsif($clstr{$clstrID}{$seqID}{'class'} eq 'LTR/Gypsy')
+	    elsif($class eq 'LTR/Gypsy')
 	    {
 		$classes{'LTR/Gypsy'}{'count'}+=$clstr{$clstrID}{$seqID}{'count'};
 	    $classes{'LTR/Gypsy'}{'numBp'}+=$clstr{$clstrID}{$seqID}{'length'};
@@ -378,19 +380,19 @@ foreach my$clstrID (keys%clstr)
 	    $classes{'LTR/other'}{'numSeqs'}++;
 	    }
 	}
-	elsif($clstr{$clstrID}{$seqID}{'class'}=~/^LINE/)
+	elsif($class=~/^LINE/)
 	{
 	    $classes{'LINE'}{'count'}+=$clstr{$clstrID}{$seqID}{'count'};
 	    $classes{'LINE'}{'numBp'}+=$clstr{$clstrID}{$seqID}{'length'};
 	    $classes{'LINE'}{'numSeqs'}++;
 	}
-	elsif($clstr{$clstrID}{$seqID}{'class'}=~/^SINE/)
+	elsif($class=~/^SINE/)
 	{
 	    $classes{'SINE'}{'count'}+=$clstr{$clstrID}{$seqID}{'count'};
 	    $classes{'SINE'}{'numBp'}+=$clstr{$clstrID}{$seqID}{'length'};
 	    $classes{'SINE'}{'numSeqs'}++;
 	}
-	elsif($clstr{$clstrID}{$seqID}{'class'}=~/^Satellite/)
+	elsif($class=~/^Satellite/)
 	{
 	    $classes{'Satellite'}{'count'}+=$clstr{$clstrID}{$seqID}{'count'};
 	    $classes{'Satellite'}{'numBp'}+=$clstr{$clstrID}{$seqID}{'length'};
@@ -410,7 +412,7 @@ foreach my$clstrID (keys%clstr)
 		       $sizeBp,
 		       $sizeSeqs,
 		       sprintf("%.2f", (($sumCounts/$opt{coverage})*$opt{readLength})/(10**6)),
-		       $class),"\n";
+		       $class),"\n" unless $class eq "mitochondrion" || $class eq "chloroplast"; #skip mito and chloro in output. The numbers here are not meaningful in comparison to the core genome and the repeat parts of the genome.
 }
 
 close BYCLSTR or $L->logdie($!);
@@ -480,7 +482,7 @@ sub check_binary{
         ($v) = $vs =~ /(\S+?)\D*$/m;
 
         if (version->parse($v) < version->parse($ver->[1])) {
-            $L->logdie("Version $v of '$bin' < $v");
+            $L->logdie("Version $v of '$bin' < $ver->[1]");
         }
 
     }

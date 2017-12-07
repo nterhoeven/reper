@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source reper.conf
+source ./reper.conf
 
 #export LD_LIBRARY_PATH='/software/bamtools/lib/':$LD_LIBRARY_PATH
 
@@ -25,7 +25,7 @@ ulimit -v "$maxMemoryKB"
 # #index bam
 # "$samtools" index "$QUANTOUT"
 
-"$bowtie2" --no-unal --reorder --sensitive-local --threads "$MAXTHREADS" -S -x "$TRINITYOUT" -U "$READS1" -U "$READS2" | "$samtools" view -b -@ "$MAXTHREADS" | "$samtools" sort -m "$maxMemoryKB"/"$MAXTHREADS" -o "$QUANTOUT" -T aa-temp -O bam -@ "$MAXTHREADS"
+"$bowtie2" --no-unal --reorder --sensitive-local --threads "$MAXTHREADS" -x "$TRINITYOUT" -U "$READS1" -U "$READS2" | "$samtools" view -b -@ "$MAXTHREADS" | "$samtools" sort -m "$maxMemoryKB"/"$MAXTHREADS" -o "$QUANTOUT" -T aa-temp -O bam -@ "$MAXTHREADS"
 
 #index bam
 "$samtools" index "$QUANTOUT"

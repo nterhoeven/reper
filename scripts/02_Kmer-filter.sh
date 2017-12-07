@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #read config for parameters
-source reper.conf
+source ./reper.conf
 ulimit -v "$maxMemoryKB"
 
 #kmer-filter script needs jellyfish in $PATH

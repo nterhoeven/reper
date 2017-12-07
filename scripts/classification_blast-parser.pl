@@ -74,7 +74,7 @@ while(<FASTA>)
     }
 }
 close OUT or die $!;
-close FASTA or die $!
+close FASTA or die $!;
 
 sub find_best
 {

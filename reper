@@ -8,8 +8,8 @@
 
 
 ## read config
-export reperDir="$PWD"
-source reper.conf
+source ./reper.conf
+export reperDir
 ulimit -v "$maxMemoryKB"
 
 ## define next job
@@ -44,9 +44,23 @@ case "$nextJob" in
     configure-refseq) "$scrDir"/configure-refseq.sh
 		     exit 0
 		     ;;
-    configure-repbase) perl "$scrDir"/configure-repbase.pl $2 $3 $4
+    configure-repbase) mkdir -p "$3"
+		       perl "$scrDir"/configure-repbase.pl "$2" "$3" "$4"
+		       "$makeblastdb" -dbtype 'nucl' -in "$2".fa
 		       exit 0
 		       ;;
+    print-env) echo "#####################"
+	       echo "printing variables"
+	       echo "reperDir: $reperDir"
+	       echo "conf-file: "$(realpath reper.conf)
+	       echo "scrDir: $scrDir"
+	       echo "depDir: $depDir"
+	       echo "dbDir: $dbDir"
+	       echo "max-CPU: $MAXTHREADS"
+	       echo "max-MEM: $MAXMEMORY"
+	       echo "input: $READS1 $READS2"
+	       exit 0
+	       ;;
     *) echo "$STARTJOB is not a valid job name!"
        echo "please select one of the following:"
        echo "jelly, kmerFilter, Trinity, cluster, classify, quantify, landscape"
