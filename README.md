@@ -7,18 +7,46 @@ The detection is based on kmer frequencies and does not rely on a genome assembl
 This allows an analysis of repeat sequences of organisms with large and repeat rich
 genomes (especially plants). 
 
+
+## tl,dr
+I don't want to read much - just let me start.
+
+Download and install reper via Docker
+
+```
+docker pull ########
+```
+
+configure databases
+
+```
+docker run reper reper configure-REdat
+docker run reper reper configure-refseq
+```
+
+run pipeline with test dataset (runs on XX CPU cores with XXG memory)
+
+```
+unzip testdata.zip
+docker run reper reper jelly
+```
+
+
+
 ## Installation
-### Dependencies
-reper depends on a few other software packages (see list below). Most of them are common
-bioinformatic tools and probably already installed on your system. If this is not the case,
-reper ships with a script called `install_dependencies.sh` which downloads and installs all
-necessary software in a subdirectory of reper.
 
-The example config file `reper.conf` contains the locations of the dependencies used by the
-install-script. If you want to use already installed software, you have to change the paths
-in the config file.
+### Docker
+To make installation easy and ensure reproducibility, we provide a Docker container
+for reper with all dependencies installed.
 
-#### List of dependencies
+### Singularity
+
+### Manual installation
+reper can be installed manually on your system. In order to do so, please install the
+dependencies listed below, download this github repository and add the correct paths
+in the reper.conf file.
+
+### List of dependencies
 
 | Tool | version | license | citation |
 | --- | --- | --- | --- |
@@ -34,8 +62,37 @@ in the config file.
 
 ## Usage
 
+### preparing the databases
+
+For the classification of the found repeats, reper needs a library of
+known repeats. This can be any user defined repeat set as long as the file
+format fits the needs of reper (see below). There are automated scripts included
+to configure the databases REdat, repbase and refseq (for chloroplast and mitochondrion).
+
+If you are working with plant data, we recommend to use REdat for the repeat classification
+and refseq for the identification of chloroplast and mitochondrion. You can download and
+configure these databases with the following commands:
+
+```
+reper configure-REdat
+reper configure-refseq
+```
+
+If you want to use the repbase database, you have to obtain it from the giri-website yourself
+and accept their license terms. You can then use `reper configure-repbase` to create a reper-compatible
+file from it.
+
+The database file should be in fasta format with header like this:
+```
+>seqID|class|source
+```
+The seqID should contain a unique ID, the class the class assigned to this sequence
+and the source can be a species name or similar
+
+
+
 ### Running the Pipeline
-The reper pipeline consists of 8 steps - kmer counting, read filtering, assembly, clustering, classification, quantification and landscape construction.
+The reper pipeline consists of 7 steps - kmer counting, read filtering, assembly, clustering, classification, quantification and landscape construction.
 To start reper, use
 
 ```
@@ -61,9 +118,9 @@ The config file is called `reper.conf` and consists of the following sections
   + names of intermediate files
   + parameter settings shared between steps
 
-The first section has to be adjusted to each run. The second section has to be adjusted if you use
-instances of the dependencies which are not installed by reper. You rarely have to change the third section,
-as it contains settings used internally in reper.
+The first section has to be adjusted to each run. The second section has to be adjusted if you
+installed reper manually and did not use the docker or singularity image. You rarely have to change
+the third section, as it contains settings used internally in reper.
 
 ## References
 
