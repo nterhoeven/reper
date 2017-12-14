@@ -12,7 +12,7 @@ authors:
     orcid:
     affiliation: "1, 2" # (Multiple affiliations must be quoted)
   - name: Thomas Hackl
-    orcid:
+    orcid: 0000-0002-0022-320X
     affiliation: 3
   - name: Jörg Schultz
     orcid:
@@ -35,21 +35,51 @@ these sequences, the amount of them differs widely. For example, the yeast genom
 repeats, Arabidopsis 30 %, human 50 % and wheat 90 %.
 Identification of these elements is done by searching for typical structures and sequences in the genome
 assembly. However, the presence of repetetive elements is a challenge for assembly algorithms, which
-leads to an underrepresentation of repeats in the assembly. Thus, the annotation of repeat regions based
+leads to an underrepresentation of repeats in a genome assembly. Thus, the annotation of repeat regions based
 on an assembly is error prone.
+
 To adress this challenge, we present reper, a kmer based method to detect, classify and quantify repeats
-in NGS data without the need of a genome assembly. Our pipeline samples reads with high kmer coverage
-from the NGS dataset. This subset is then assembled using the transcriptome assembler Trinity. This
-ensures that all possible variants of a repetitive element are reported. The repeats are then clustered
-using cd-hit to create exemplar sequences of each repet in the genome. The exemplars are classified
-based on homolgy to known repeats. The reference database here can be chosen by the user. By using
-read mappings, the repeat content can then be quantified on class and cluster level. The resulting
+in NGS data without the need of a genome assembly.
+Our pipeline samples reads with high kmer coverage (jellyfish) from the NGS dataset. This subset is then
+assembled using the transcriptome assembler Trinity. This ensures that all possible variants of a repetitive
+element are reported. The repeats are then clustered using cd-hit to create exemplar sequences of each repeat
+in the genome. The exemplars are classified based on homolgy to known repeats. Since reper was developed with
+plant data, the default classification libraries are REdat for repeats and refseq for chloroplast and mitochondrial
+sequences. The reference database can be changed by the user to accomodate ones need. A configuration script for
+the popular, but proprietary database repbase is also provided.
+By using read mappings, the repeat content can then be quantified on class and cluster level. The resulting
 repeat landscapes can then be analyzed by using the supplementary R scripts provided with the pipeline.
+
 Currently reper is only able to work on paired end Illumina data. Support of long-read technologies
 such as PacBio and Nanopore is in developement.
+
+A similar approach is used by dnaPipeTE. However it is cumbersome to install since it relies on many
+dependencies including the RepeatMasker package and the proprietary repeat database repbase by giri.
+
+The reper source code is available on github under the MIT license. For easy installation and usage, a Docker container is
+also provided. Since reper is usually run in an HPC environment where users don't have root or
+Docker rights, there is also a singularity image available which can be used with normal user permissions.
+
+
 We are currently using reper to analyze the repeat content in multiple plant genome sequencing projects.
 
+# TODO
 
+- citations
+  + repeat percentages
+  + software used in reper
+    * jellyfish
+    * Trinity
+    * cd-hit
+    * refseq DB
+    * REdat DB
+    * bowtie
+    * samtools
+  + dnaPipeTE  
+- workflow graphic?
+
+
+# joss template content
 - A summary describing the high-level functionality and purpose of the software
 for a diverse, non-specialist audience
 - A clear statement of need that illustrates the purpose of the software

@@ -1,12 +1,32 @@
-# reper
-reper - A kmer based repeat detection pipeline
+# reper - find, classify and quantify repeats without a genome assembly
+
 
 ## What is reper?
 reper is a pipeline to detect repetitive sequences in genome sequencing data.
 The detection is based on kmer frequencies and does not rely on a genome assembly.
 This allows an analysis of repeat sequences of organisms with large and repeat rich
-genomes (especially plants). 
+genomes (especially plants). For a detailed explanation of the pipeline, see the [reper wiki](https://github.com/nterhoeven/reper/wiki/How-does-reper-work%3F).
 
+
+## How do I get reper?
+reper is available as Docker container, Singularity image or can be installed manually.
+Please visit the [reper wiki installation page](https://github.com/nterhoeven/reper/wiki/Installation) for detailed explanations.
+
+## How do I run reper?
+Running reper is very easy. You just need to adjust the config file and start reper with `reper kmerCount`.
+A detailed explanation of the available commands is given in the [usage page of the reper wiki](https://github.com/nterhoeven/reper/wiki/Using-reper).
+Or you can take a look at the [Tutorial](https://github.com/nterhoeven/reper/wiki/Tutorial) and lear how to analyze the
+repeat content of the sugar beet using reper.
+
+
+
+
+
+
+
+
+
+# legacy readme - will be removed
 
 ## tl,dr
 I don't want to read much - just let me start.
@@ -37,9 +57,27 @@ docker run reper reper jelly
 
 ### Docker
 To make installation easy and ensure reproducibility, we provide a Docker container
-for reper with all dependencies installed.
+for reper with all dependencies installed. You can get it by running
+
+```
+docker pull nterhoeven/reper
+```
+reper can then be used like
+
+```
+docker run --rm -v $(pwd):/data <reper-command>
+```
 
 ### Singularity
+Since Docker requires special user permissions to run and is therefore not perfect for
+HPC environments, we also provide a singularity image. You can get it by running:
+
+```
+singularity pull ######
+```
+You can use reper then with
+```
+singularity exec --writable reper <reper-command>
 
 ### Manual installation
 reper can be installed manually on your system. In order to do so, please install the
