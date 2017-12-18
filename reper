@@ -61,6 +61,33 @@ case "$nextJob" in
 	       echo "input: $READS1 $READS2"
 	       exit 0
 	       ;;
+    help) echo "Usage: reper <command>"
+	  echo ""
+	  echo "pipeline commands:"
+	  echo "These commands are used to start a specific pipeline step."
+	  echo "The follow-up steps are executed automatically."
+	  echo "  kmerCount"
+	  echo "  kmerFilter"
+	  echo "  assembly"
+	  echo "  cluster"
+	  echo "  classify"
+	  echo "  quantify"
+	  echo "  landscape"
+	  echo ""
+	  echo "configuration commands:"
+	  echo "These commands are used to configure the specified reference databases"
+	  echo "  configure-REdat    downloads and configures the REdat database"
+	  echo "  configure-refseq   downloads and configures the refseq database"
+	  echo "  configure-repbase  configures the repbase database. Needs the following input:"
+	  echo "                     <file-list> <target-dir> <repbase-dir>"
+	  echo "                     see the wiki for details."
+	  echo ""
+	  echo "other commands:"
+	  echo "  print-env            gives debug info about the currently used environment"
+	  echo "  help                 prints this help"         
+	  exit 0
+	  ;;
+    
     *) echo "$STARTJOB is not a valid job name!"
        echo "please select one of the following:"
        echo "kmerCount, kmerFilter, assembly, cluster, classify, quantify, landscape"
