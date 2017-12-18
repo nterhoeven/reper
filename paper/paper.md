@@ -22,7 +22,7 @@ affiliations:
     index: 1
   - name: Lehrstuhl für Bioinformatik, Universität Würzburg
     index: 2
-  - name: Chisholm Lab, Massachusetts Institute of Technology
+  - name: Department of Civil and Environmental Engineering, Massachusetts Institute of Technology
     index: 3
 date: 07 December 2017
 bibliography: paper.bib
