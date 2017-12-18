@@ -1,37 +1,34 @@
 #!/bin/bash
 
 source ./reper.conf
-
-#export LD_LIBRARY_PATH='/software/bamtools/lib/':$LD_LIBRARY_PATH
-
 ulimit -v "$maxMemoryKB"
-
 
 
 #build bowtie2 index
 "$bowtieBuild" "$TRINITYOUT" "$TRINITYOUT"
-
-
-#map reads to repeat library
-# "$bowtie2" --no-unal --reorder --sensitive-local --threads "$MAXTHREADS" -S mapped_reads.sam -x "$TRINITYOUT" -U "$READS1" -U "$READS2"
-
-
-# ## convert sam to sorted and indexed bam
-# #sam-to-bam
-# "$samtools" view -b -o alignments.bam -@ "$MAXTHREADS" mapped_reads.sam
-# #sort bam
-# #-m 2GB memory per thread -@ 32 threads -O output bam 
-# "$samtools" sort -m 2G -o "$QUANTOUT" -T aa-temp -O bam -@ "$MAXTHREADS" alignments.bam
-# #index bam
-# "$samtools" index "$QUANTOUT"
+if [ $? -ne 0 ]; then
+    echo "########################"
+    echo "bowtie build failed"
+    exit 1
+fi
 
 "$bowtie2" --no-unal --reorder --sensitive-local --threads "$MAXTHREADS" -x "$TRINITYOUT" -U "$READS1" -U "$READS2" | "$samtools" view -b -@ "$MAXTHREADS" | "$samtools" sort -m "$maxMemoryKB"/"$MAXTHREADS" -o "$QUANTOUT" -T aa-temp -O bam -@ "$MAXTHREADS"
+
+if [ $? -ne 0 ]; then
+    echo "########################"
+    echo "mapping failed"
+    exit 1
+fi
 
 #index bam
 "$samtools" index "$QUANTOUT"
 
 
+if [ $? -eq 0 ]; then
+    "$reperDir"/reper landscape
+else
+    echo "########################"
+    echo "quantification failed"
+    exit 1
+fi
 
-echo "################################"
-echo "finished mapping --> run build-landscape"
-"$reperDir"/reper landscape

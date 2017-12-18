@@ -16,7 +16,11 @@ echo "#########################################"
 
 "$jellyfish" count -s 100000000 -C -m "$KMERSIZE" -t "$MAXTHREADS" -o "$JELLYOUT" "$READS1" "$READS2"
 
+if [ $? -eq 0 ]; then
+    "$reperDir"/reper kmerFilter
+else
+    echo "########################"
+    echo "kmerCount failed"
+    exit 1
+fi
 
-echo "############"
-echo "finsished Jellyfish -> running kmer filter"
-"$reperDir"/reper kmerFilter
