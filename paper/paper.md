@@ -64,15 +64,12 @@ We are currently using reper to analyze the repeat content in multiple plant gen
 of the [reper wiki](https://github.com/nterhoeven/reper/wiki).
 
 
+[schematic overview of workflow](workflow.png)
+
 
 # Acknowledgements
 
 We would like to thank Markus Ankenbrand and Frank Förster for valuable discussions and their support and advice on different topics like Docker and pipeline design.
-
-
-# TODO
-
-- workflow graphic
 
 
 # References
