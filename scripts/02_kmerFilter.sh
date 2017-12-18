@@ -13,4 +13,4 @@ export PATH="$jellypath":$PATH
 
 echo "######################################"
 echo "finished filtering --> running trinity"
-"$reperDir"/reper Trinity
+"$reperDir"/reper assembly

@@ -3,7 +3,7 @@
 # This script is used to start reper
 # call this script as
 # reper <job>
-# with <job> as the next part to execute (jelly, kmerFilter, Trinity, cluster, classify, quantify, landscape)
+# with <job> as the next part to execute (kmerCount, kmerFilter, assembly, cluster, classify, quantify, landscape)
 # the jobs following the givien one are executed automatically
 
 
@@ -17,25 +17,25 @@ nextJob="$1"
 
 ## run scripts
 case "$nextJob" in
-    jelly) "$scrDir"/01_Jellyfish.sh
+    kmerCount) "$scrDir"/01_kmerCount.sh
 	   exit 0
 	   ;;
-    kmerFilter) "$scrDir"/02_Kmer-filter.sh
+    kmerFilter) "$scrDir"/02_kmerFilter.sh
 		exit 0
 		;;
-    Trinity) "$scrDir"/03_Trinity.sh
+    assembly) "$scrDir"/03_assembly.sh
 	     exit 0
 	     ;;
-    cluster) "$scrDir"/04_cd-hit.sh 
+    cluster) "$scrDir"/04_cluster.sh 
 	     exit 0
 	     ;;
-    classify) "$scrDir"/05_Classifier.sh
+    classify) "$scrDir"/05_classifiy.sh
 	      exit 0
 	      ;;
-    quantify) "$scrDir"/06_Bowtie.sh 
+    quantify) "$scrDir"/06_quantify.sh 
 	      exit 0
 	      ;;
-    landscape) "$scrDir"/07_build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
+    landscape) "$scrDir"/07_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 	       exit 0
 	       ;;
     configure-REdat) "$scrDir"/configure-REdat.sh
@@ -63,7 +63,8 @@ case "$nextJob" in
 	       ;;
     *) echo "$STARTJOB is not a valid job name!"
        echo "please select one of the following:"
-       echo "jelly, kmerFilter, Trinity, cluster, classify, quantify, landscape"
+       echo "kmerCount, kmerFilter, assembly, cluster, classify, quantify, landscape"
+       echo "run reper help for more info"
        exit 1
        ;;
 esac
