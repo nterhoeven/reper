@@ -64,7 +64,7 @@ We are currently using reper to analyze the repeat content in multiple plant gen
 of the [reper wiki](https://github.com/nterhoeven/reper/wiki).
 
 
-[schematic overview of workflow](workflow.png)
+![schematic overview of workflow](workflow.png)
 
 
 # Acknowledgements
