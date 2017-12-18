@@ -35,7 +35,7 @@ case "$nextJob" in
     quantify) "$scrDir"/06_quantify.sh 
 	      exit 0
 	      ;;
-    landscape) "$scrDir"/07_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
+    landscape) "$scrDir"/07_landscape.sh
 	       exit 0
 	       ;;
     configure-REdat) "$scrDir"/configure-REdat.sh
