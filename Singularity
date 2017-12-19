@@ -11,19 +11,25 @@ export reperDir
 depDir=/dependencies
 export depDir
 
-PATH=$reperDir:$PATH
+PATH=/reper:$PATH
 export PATH
 
-PERL5LIB=$depDir/lib:$PERL5LIB
+PERL5LIB=/dependencies/lib:$PERL5LIB
 export PERL5LIB
 
-TRINITY_HOME=$depDir/trinityrnaseq-Trinity-v2.4.0
+TRINITY_HOME=/dependencies/trinityrnaseq-Trinity-v2.4.0
 export TRINITY_HOME
+
+
+%files
+reper /reper
+reper.conf /reper
+scripts/ /reper
 
 %post
 apt-get update && apt-get dist-upgrade && apt-get -y install wget g++ build-essential unzip libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libtbb-dev git libipc-run-perl python emacs openjdk-8-jre icedtea-8-plugin bc
 
-cd $depDir
+cd /dependencies
 
 
 wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.6/jellyfish-2.2.6.tar.gz && tar xzf jellyfish-2.2.6.tar.gz && cd jellyfish-2.2.6 && ./configure && make && make install
@@ -34,7 +40,7 @@ wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1
 wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.28/ncbi-blast-2.2.28+-x64-linux.tar.gz && tar xzf ncbi-blast-2.2.28+-x64-linux.tar.gz
 git clone https://github.com/thackl/kmer-scripts.git
 
-cd $depDir/lib
+cd /dependencies/lib
 wget http://search.cpan.org/CPAN/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz && tar xzf Log-Log4perl-1.49.tar.gz && cd Log-Log4perl-1.49 && perl Makefile.PL && make && make install
 git clone https://github.com/BioInf-Wuerzburg/perl5lib-Fastq.git && mv perl5lib-Fastq/lib/* .
 git clone https://github.com/BioInf-Wuerzburg/perl5lib-Fasta.git && mv perl5lib-Fasta/lib/* .
@@ -44,9 +50,9 @@ git clone https://github.com/thackl/perl5lib-Kmer.git && mv perl5lib-Kmer/lib/* 
 git clone https://github.com/BioInf-Wuerzburg/perl5lib-Verbose.git && mv perl5lib-Verbose/lib/* .
 git clone https://github.com/thackl/perl5lib-Sam.git && mv perl5lib-Sam/lib/* .
 
-cd $reperDir
-chmod -R ga+rwX $reperDir
-chmod -R ga+rwX $depDir
+cd /reper
+chmod -R ga+rwX /reper
+chmod -R ga+rwX /dependencies
 
 %runscript
 reper
