@@ -4,6 +4,11 @@ From:ubuntu:latest
 %labels
 MAINTAINER nterhoeven
 
+%setup
+mkdir /reper
+mkdir /dependencies
+mkdir /reper/scripts
+
 %environment
 reperDir=/reper
 export reperDir
@@ -24,7 +29,7 @@ export TRINITY_HOME
 %files
 reper /reper
 reper.conf /reper
-scripts/ /reper
+scripts/* /reper/scripts/
 
 %post
 apt-get update && apt-get dist-upgrade && apt-get -y install wget g++ build-essential unzip libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libtbb-dev git libipc-run-perl python emacs openjdk-8-jre icedtea-8-plugin bc
