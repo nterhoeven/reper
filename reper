@@ -42,7 +42,7 @@ case "$nextJob" in
 	     exit 0
 	     ;;
     classify) to_log
-	      "$scrDir"/05_classifiy.sh &>> "$LOGFILE"
+	      "$scrDir"/05_classify.sh &>> "$LOGFILE"
 	      exit 0
 	      ;;
     quantify) to_log
