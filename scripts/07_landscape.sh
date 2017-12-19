@@ -7,6 +7,17 @@ ulimit -v "$maxMemoryKB"
 perl build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 
 if [ $? -eq 0 ]; then
+    if [ $cleanUp -eq "yes" ]; then
+	echo "########################"
+	date
+	echo "cleaning up intermediate files"
+
+	rm Trinity.fasta
+	cp trinity_out_dir/Trinity.fasta .
+	rm "$JELLYOUT" "$FILTEROUT"*.fq "$QUANTOUT"* *.bls *.bt2
+	rm -r trinity_out_dir
+    fi
+    
     echo "########################"
     date
     echo "reper finished"
