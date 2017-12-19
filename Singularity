@@ -5,9 +5,9 @@ From:ubuntu:latest
 MAINTAINER nterhoeven
 
 %setup
-mkdir /reper
-mkdir /dependencies
-mkdir /reper/scripts
+mkdir ${SINGULARITY_ROOTFS}/reper
+mkdir ${SINGULARITY_ROOTFS}/dependencies
+mkdir ${SINGULARITY_ROOTFS}/reper/scripts
 
 %environment
 reperDir=/reper
