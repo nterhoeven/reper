@@ -59,8 +59,8 @@ case "$nextJob" in
     configure-refseq) "$scrDir"/configure-refseq.sh
 		     exit 0
 		     ;;
-    configure-repbase) mkdir -p "$3"
-		       perl "$scrDir"/configure-repbase.pl "$2" "$3" "$4"
+    configure-repbase) mkdir -p "$dbDir/repbase"
+		       perl "$scrDir"/configure-repbase.pl "$2" "$dbDir/repbase" "$3"
 		       "$makeblastdb" -dbtype 'nucl' -in "$2".fa
 		       exit 0
 		       ;;
