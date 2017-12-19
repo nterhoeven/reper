@@ -21,7 +21,7 @@ TRINITY_HOME=$depDir/trinityrnaseq-Trinity-v2.4.0
 export TRINITY_HOME
 
 %post
-apt-get update && apt-get install -y  dist-upgrade && apt-get -y install wget g++ build-essential unzip libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libtbb-dev git libipc-run-perl python emacs openjdk-8-jre icedtea-8-plugin bc
+apt-get update && apt-get dist-upgrade && apt-get -y install wget g++ build-essential unzip libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libtbb-dev git libipc-run-perl python emacs openjdk-8-jre icedtea-8-plugin bc
 
 cd $depDir
 
