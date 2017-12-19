@@ -38,4 +38,4 @@ WORKDIR $reperDir
 RUN chmod -R ga+rwX $reperDir
 RUN chmod -R ga+rwX $depDir
 
-ENTRYPOINT reper
+ENTRYPOINT ["reper"]
