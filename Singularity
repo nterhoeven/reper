@@ -7,6 +7,7 @@ MAINTAINER nterhoeven
 %setup
 mkdir ${SINGULARITY_ROOTFS}/reper
 mkdir ${SINGULARITY_ROOTFS}/dependencies
+mkdir ${SINGULARITY_ROOTFS}/dependencies/lib
 mkdir ${SINGULARITY_ROOTFS}/reper/scripts
 
 %environment
