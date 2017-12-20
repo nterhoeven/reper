@@ -7,7 +7,7 @@ ulimit -v "$maxMemoryKB"
 perl "$scrDir"/build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 
 if [ $? -eq 0 ]; then
-    if [ $cleanUp -eq "yes" ]; then
+    if [ $cleanUp == "yes" ]; then
 	echo "########################"
 	date
 	echo "cleaning up intermediate files"
