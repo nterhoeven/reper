@@ -4,7 +4,7 @@ source ./reper.conf
 ulimit -v "$maxMemoryKB"
 
 
-perl build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
+perl "$scrDir"/build_landscape.pl --clstr "$CLUSTEROUT".clstr --fasta "$CLASSIFYOUT" --bam "$QUANTOUT" --coverage "$COVERAGE" --samtools "$samtools"
 
 if [ $? -eq 0 ]; then
     if [ $cleanUp -eq "yes" ]; then
