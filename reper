@@ -61,7 +61,7 @@ case "$nextJob" in
 		     ;;
     configure-repbase) mkdir -p "$dbDir/repbase"
 		       perl "$scrDir"/configure-repbase.pl "$2" "$dbDir/repbase" "$3"
-		       "$makeblastdb" -dbtype 'nucl' -in "$2".fa
+		       "$makeblastdb" -dbtype 'nucl' -in "$dbDir/repbase/$2".fa
 		       exit 0
 		       ;;
     print-env) echo "#####################"

@@ -5,6 +5,10 @@ use warnings;
 
 my($setFile,$targetDir,$repBaseDir)=@ARGV;
 
+print STDERR "set list: $setFile
+repBase directory: $repBaseDir
+output: $targetDir/$setFile.fa\n";
+
 my@files=`find $repBaseDir -name "*.ref"`;
 
 my@FilesNeeded;
@@ -35,7 +39,7 @@ foreach my$file (@files)
     push(@FilesNeeded, $file) if exists $set{$filename};
 }
 
-open(OUT,'>',$setFile.".fa") or die $!;
+open(OUT,'>',$targetDir."/".$setFile.".fa") or die $!;
 foreach my$file (@FilesNeeded)
 {
     open(IN,'<',$file) or die $!;
