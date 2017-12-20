@@ -72,4 +72,4 @@ chmod -R ga+rwX /reper
 chmod -R ga+rwX /dependencies
 
 %runscript
-reper
+exec reper "$@"
