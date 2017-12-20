@@ -33,7 +33,7 @@ RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Verbose.git && mv per
 RUN git clone https://github.com/thackl/perl5lib-Sam.git && mv perl5lib-Sam/lib/* .
 
 
-WORKDIR $reperDir
+WORKDIR /data
 
 RUN chmod -R ga+rwX $reperDir
 RUN chmod -R ga+rwX $depDir
