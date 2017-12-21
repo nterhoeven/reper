@@ -1,3 +1,13 @@
+#databases directory
+databases/
+#singularity images
+*.img
+#emacs save copies
+*~
+#todo list
+reper-to-do.org
+
+## defaults from github
 /blib/
 /.build/
 _build/

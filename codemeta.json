@@ -1,0 +1,37 @@
+{
+    "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+    "@type": "Code",
+    "author": [
+	{
+	    "@id": "https://orcid.org/0000-0002-8669-0000",
+	    "@type": "Person",
+	    "email": "niklas.terhoeven@uni-wuerzburg.de",
+	    "name": "Niklas Terhoeven",
+	    "affiliation": "Center for Computational and Theoretical Biology, Universität Würzburg"
+	},
+	{
+	    "@id": "",
+	    "@type": "Person",
+	    "email": "Joerg.Schultz@biozentrum.uni-wuerzburg.de",
+	    "name": "Jörg Schultz",
+	    "affiliation": "Center for Computational and Theoretical Biology, Universität Würzburg"
+	},
+	{
+	    "@id": "https://orcid.org/0000-0002-0022-320X",
+	    "@type": "Person",
+	    "email": "thackl@mit.edu",
+	    "name": "Thomas Hackl",
+	    "affiliation": "Department of Civil and Environmental Engineering, Massachusetts Institute of Technology"
+	}
+    ],
+    "identifier": "",
+    "codeRepository": "https://github.com/nterhoeven/reper",
+    "datePublished": "2017-12-21",
+    "dateModified": "2017-12-21",
+    "dateCreated": "2017-12-21",
+    "description": "reper - find, classify and quantify repeats without a genome assembly",
+    "keywords": "NGS, repeats, transposons, genome",
+    "license": "MIT",
+    "title": "reper",
+    "version": "v1.0.0"
+}

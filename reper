@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# This script is used to start reper
+# call this script as
+# reper <job>
+# with <job> as the next part to execute (kmerCount, kmerFilter, assembly, cluster, classify, quantify, landscape)
+# the jobs following the givien one are executed automatically
+
+
+## read config
+source ./reper.conf
+export reperDir
+ulimit -v "$maxMemoryKB"
+
+## define next job
+nextJob="$1"
+
+function to_log {
+echo "########################" &>> "$LOGFILE"
+date &>> "$LOGFILE"
+echo "running $nextJob" &>> "$LOGFILE"
+echo "########################" &>> "$LOGFILE"
+}
+
+
+## run scripts
+case "$nextJob" in
+    kmerCount) to_log
+	       "$scrDir"/01_kmerCount.sh &>> "$LOGFILE"
+	       exit 0
+	       ;;
+    kmerFilter) to_log
+		"$scrDir"/02_kmerFilter.sh &>> "$LOGFILE"
+		exit 0
+		;;
+    assembly) to_log
+	      "$scrDir"/03_assembly.sh &>> "$LOGFILE"
+	      exit 0
+	      ;;
+    cluster) to_log
+	     "$scrDir"/04_cluster.sh &>> "$LOGFILE"
+	     exit 0
+	     ;;
+    classify) to_log
+	      "$scrDir"/05_classify.sh &>> "$LOGFILE"
+	      exit 0
+	      ;;
+    quantify) to_log
+	      "$scrDir"/06_quantify.sh &>> "$LOGFILE"
+	      exit 0
+	      ;;
+    landscape) to_log
+	       "$scrDir"/07_landscape.sh &>> "$LOGFILE"
+	       exit 0
+	       ;;
+    configure-REdat) "$scrDir"/configure-REdat.sh 
+		     exit 0
+		     ;;
+    configure-refseq) "$scrDir"/configure-refseq.sh
+		     exit 0
+		     ;;
+    configure-repbase) mkdir -p "$dbDir/repbase"
+		       perl "$scrDir"/configure-repbase.pl "$2" "$dbDir/repbase" "$3"
+		       "$makeblastdb" -dbtype 'nucl' -in "$dbDir/repbase/$2".fa
+		       exit 0
+		       ;;
+    print-env) echo "#####################"
+	       echo "printing variables"
+	       echo "reperDir: $reperDir"
+	       echo "conf-file: "$(realpath reper.conf)
+	       echo "scrDir: $scrDir"
+	       echo "depDir: $depDir"
+	       echo "dbDir: $dbDir"
+	       echo "max-CPU: $MAXTHREADS"
+	       echo "max-MEM: $MAXMEMORY"
+	       echo "input: $READS1 $READS2"
+	       exit 0
+	       ;;
+    help) echo "Usage: reper <command>"
+	  echo ""
+	  echo "pipeline commands:"
+	  echo "These commands are used to start a specific pipeline step."
+	  echo "The follow-up steps are executed automatically."
+	  echo "  kmerCount"
+	  echo "  kmerFilter"
+	  echo "  assembly"
+	  echo "  cluster"
+	  echo "  classify"
+	  echo "  quantify"
+	  echo "  landscape"
+	  echo ""
+	  echo "configuration commands:"
+	  echo "These commands are used to configure the specified reference databases"
+	  echo "  configure-REdat    downloads and configures the REdat database"
+	  echo "  configure-refseq   downloads and configures the refseq database"
+	  echo "  configure-repbase  configures the repbase database. Needs the following input:"
+	  echo "                     <file-list> <target-dir> <repbase-dir>"
+	  echo "                     see the wiki for details."
+	  echo ""
+	  echo "other commands:"
+	  echo "  print-env            gives debug info about the currently used environment"
+	  echo "  help                 prints this help"         
+	  exit 0
+	  ;;
+    
+    *) echo "$STARTJOB is not a valid job name!"
+       echo "run reper help for more info"
+       exit 1
+       ;;
+esac
+
