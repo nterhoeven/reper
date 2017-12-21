@@ -2,7 +2,8 @@
 
 [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/nterhoeven/reper/)
 [![Docker Build Status](https://img.shields.io/docker/build/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/nterhoeven/reper/)
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/nterhoeven/reper/releases)
+[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/nterhoeven/reper/releases/tag/v0.0.1)
+[![DOI](https://zenodo.org/badge/80427752.svg)](https://zenodo.org/badge/latestdoi/80427752)
 
 ## What is reper?
 reper is a pipeline to detect repetitive sequences in genome sequencing data.
