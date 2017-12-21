@@ -19,7 +19,7 @@ Please visit the [reper wiki installation page](https://github.com/nterhoeven/re
 ## How do I run reper?
 Running reper is very easy. You just need to adjust the config file and start reper with `reper kmerCount`.
 A detailed explanation of the available commands is given in the [usage page of the reper wiki](https://github.com/nterhoeven/reper/wiki/Using-reper).
-Or you can take a look at the [Tutorial](https://github.com/nterhoeven/reper/wiki/Tutorial) and lear how to analyze the
+Or you can take a look at the [Tutorial](https://github.com/nterhoeven/reper/wiki/Tutorial) and learn how to analyze the
 repeat content of the sugar beet using reper.
 
 
@@ -28,6 +28,5 @@ Contribution to reper is always appreciated. Please submit any bugs, feature req
 If you want to contribute code, feel free to fork this repository and/or open a pull request.
 
 ## License and Citation
-reper is placed under the MIT License. If you use reper in your research, please cite the
-[publication in JOSS]()
+reper is placed under the MIT License. 
 
