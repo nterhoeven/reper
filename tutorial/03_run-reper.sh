@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run --rm ##### kmerCount
+docker run --rm -v $(pwd):/data kmerCount
