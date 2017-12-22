@@ -14,7 +14,7 @@ authors:
   - name: Jörg Schultz
     orcid:
     affiliation: "1, 2"
-    - name: Thomas Hackl
+  - name: Thomas Hackl
     orcid: 0000-0002-0022-320X
     affiliation: 3
 affiliations:
@@ -48,7 +48,7 @@ in next generation sequencing (NGS) data without the need of a genome assembly.
 Our pipeline samples reads with high kmer coverage directly from the NGS dataset (kmer counts based on jellyfish [@marcais_fast_2011]). This subset is 
 assembled using the transcriptome assembler Trinity ([@grabherr_full-length_2011]), allowing reper to recover repeat variants at a high resolution.
 To create exemplar sequences of each repeat in the genome, the assembled repeats ar clustered using cd-hit ([@li_cd-hit:_2006],[@fu_cd-hit:_2012]).
-These are further classified based on homology to known repeats using multiple blast ([@camacho_blast+:_2009]) searches. Since reper was developed with
+These are further classified based on homology to known repeats using multiple blast ([@camacho_blast]) searches. Since reper was developed with
 a focus on plant data, the default classification libraries are REdat ([@nussbaumer_mips_2012]) for repeats, and refseq ([@oleary_reference_2016]) for chloroplast and mitochondrial
 sequences. The reference database, however, can easily be customized to the user's needs. A configuration script for
 the popular, but proprietary database repbase is provided with the package as well.
