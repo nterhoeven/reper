@@ -17,7 +17,8 @@ RUN apt-get update && \
        python \
        emacs \
        openjdk-8-jre \
-       icedtea-8-plugin bc
+       icedtea-8-plugin \
+       bc
 
 ENV reperDir /reper
 ENV depDir /dependencies
