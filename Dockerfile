@@ -51,13 +51,6 @@ RUN wget https://github.com/weizhongli/cdhit/releases/download/V4.6.7/cd-hit-v4.
     cd .. && \
     rm -rf cd-hit-v4.6.7-2017-0501 cd-hit-v4.6.7-2017-0501-Linux-binary.tar.gz
 
-RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
-    tar xzf Trinity-v2.4.0.tar.gz && \
-    cd trinityrnaseq-Trinity-v2.4.0 && \
-    make && \
-    make plugins
-ENV TRINITY_HOME="$depDir"/trinityrnaseq-Trinity-v2.4.0
-
 RUN wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1.tar.bz2 && \
     tar xjf samtools-1.4.1.tar.bz2 && \
     cd samtools-1.4.1 && \
@@ -70,6 +63,13 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1
 
 RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.28/ncbi-blast-2.2.28+-x64-linux.tar.gz && \
     tar xzf ncbi-blast-2.2.28+-x64-linux.tar.gz
+
+RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
+    tar xzf Trinity-v2.4.0.tar.gz && \
+    cd trinityrnaseq-Trinity-v2.4.0 && \
+    make && \
+    make plugins
+ENV TRINITY_HOME="$depDir"/trinityrnaseq-Trinity-v2.4.0
 
 RUN git clone https://github.com/thackl/kmer-scripts.git
 
