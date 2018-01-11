@@ -58,7 +58,9 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1
     ./configure && \
     make && \
     make check && \
-    make install
+    make install && \
+    cd .. && \
+    rm -rf samtools-1.4.1 samtools-1.4.1.tar.bz2
 
 RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.28/ncbi-blast-2.2.28+-x64-linux.tar.gz && \
     tar xzf ncbi-blast-2.2.28+-x64-linux.tar.gz
