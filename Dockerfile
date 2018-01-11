@@ -40,7 +40,8 @@ RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.6/jellyfis
 ENV LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 
 RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v2.3.2/bowtie2-2.3.2-linux-x86_64.zip && \
-    unzip bowtie2-2.3.2-linux-x86_64.zip
+    unzip bowtie2-2.3.2-linux-x86_64.zip && \
+    rm bowtie2-2.3.2-linux-x86_64.zip
 
 RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
     tar xzf Trinity-v2.4.0.tar.gz && \
