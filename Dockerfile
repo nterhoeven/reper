@@ -97,7 +97,7 @@ RUN git clone https://github.com/thackl/perl5lib-Sam.git && \
 
 WORKDIR /data
 
-RUN chmod -R ga+rwX $reperDir
-RUN chmod -R ga+rwX $depDir
+RUN chmod -R a+rwX $reperDir
+RUN chmod -R a+rwX $depDir
 
 ENTRYPOINT ["reper"]
