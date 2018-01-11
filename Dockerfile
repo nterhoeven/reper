@@ -34,7 +34,9 @@ RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.6/jellyfis
     cd jellyfish-2.2.6 && \
     ./configure && \
     make && \
-    make install
+    make install && \
+    cd .. && \
+    rm -rf jellyfish-2.2.6 jellyfish-2.2.6.tar.gz
 
 RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
     tar xzf Trinity-v2.4.0.tar.gz && \
