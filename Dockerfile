@@ -17,7 +17,8 @@ RUN apt-get update && \
        emacs \
        openjdk-8-jre \
        icedtea-8-plugin \
-       bc
+       bc && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV reperDir /reper
 ENV depDir /dependencies
