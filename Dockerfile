@@ -87,21 +87,18 @@ RUN wget http://search.cpan.org/CPAN/authors/id/P/PL/PLICEASE/File-Which-1.22.ta
     cd .. && \
     rm -rf File-Which-1.22.tar.gz File-Which-1.22
 
-RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Fastq.git && \
-    mv perl5lib-Fastq/lib/* .
-
-RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Fasta.git && \
-    mv perl5lib-Fasta/lib/* .
-
-RUN git clone https://github.com/thackl/perl5lib-Jellyfish.git && \
-    mv perl5lib-Jellyfish/lib/* .
-
-RUN git clone https://github.com/thackl/perl5lib-Kmer.git && \
-    mv perl5lib-Kmer/lib/* .
-RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Verbose.git && \
-    mv perl5lib-Verbose/lib/* .
-RUN git clone https://github.com/thackl/perl5lib-Sam.git && \
-    mv perl5lib-Sam/lib/* .
+RUN for i in \
+    https://github.com/BioInf-Wuerzburg/perl5lib-Fastq.git \
+    https://github.com/BioInf-Wuerzburg/perl5lib-Fasta.git \
+    https://github.com/thackl/perl5lib-Jellyfish.git \
+    https://github.com/thackl/perl5lib-Kmer.git \
+    https://github.com/BioInf-Wuerzburg/perl5lib-Verbose.git \
+    https://github.com/thackl/perl5lib-Sam.git; \
+    do \
+       git clone ${i} gitclone && \
+       mv gitclone/lib/* . && \
+       rm -rf gitclone; \
+    done
 
 WORKDIR /data
 
