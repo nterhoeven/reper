@@ -41,7 +41,9 @@ ENV LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 
 RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v2.3.2/bowtie2-2.3.2-linux-x86_64.zip && \
     unzip bowtie2-2.3.2-linux-x86_64.zip && \
-    rm bowtie2-2.3.2-linux-x86_64.zip
+    rm bowtie2-2.3.2-linux-x86_64.zip && \
+    chmod -R a+rwX $depDir
+
 ENV PATH="$depDir"/bowtie2-2.3.2:"$PATH"
 
 RUN wget https://github.com/weizhongli/cdhit/releases/download/V4.6.7/cd-hit-v4.6.7-2017-0501-Linux-binary.tar.gz && \
@@ -63,7 +65,8 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1
 
 RUN wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.28/ncbi-blast-2.2.28+-x64-linux.tar.gz && \
     tar xzf ncbi-blast-2.2.28+-x64-linux.tar.gz && \
-    rm ncbi-blast-2.2.28+-x64-linux.tar.gz
+    rm ncbi-blast-2.2.28+-x64-linux.tar.gz && \
+    chmod -R a+rwX $depDir
 ENV PATH="$depDir"/ncbi-blast-2.2.28+/bin:"$PATH"
 
 RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
@@ -72,7 +75,8 @@ RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.t
     make && \
     make plugins && \
     cd .. && \
-    rm Trinity-v2.4.0.tar.gz
+    rm Trinity-v2.4.0.tar.gz && \
+    chmod -R a+rwX $depDir
 ENV TRINITY_HOME="$depDir"/trinityrnaseq-Trinity-v2.4.0
 
 RUN git clone https://github.com/thackl/kmer-scripts.git
@@ -88,7 +92,8 @@ RUN wget http://search.cpan.org/CPAN/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.
     make test && \
     make install && \
     cd .. && \
-    rm -rf Log-Log4perl-1.49 Log-Log4perl-1.49.tar.gz
+    rm -rf Log-Log4perl-1.49 Log-Log4perl-1.49.tar.gz && \
+    chmod -R a+rwX $depDir
 
 RUN wget http://search.cpan.org/CPAN/authors/id/P/PL/PLICEASE/File-Which-1.22.tar.gz && \
     tar xzf File-Which-1.22.tar.gz && \
@@ -98,7 +103,8 @@ RUN wget http://search.cpan.org/CPAN/authors/id/P/PL/PLICEASE/File-Which-1.22.ta
     make test && \
     make install && \
     cd .. && \
-    rm -rf File-Which-1.22.tar.gz File-Which-1.22
+    rm -rf File-Which-1.22.tar.gz File-Which-1.22 && \
+    chmod -R a+rwX $depDir
 
 RUN for i in \
     https://github.com/BioInf-Wuerzburg/perl5lib-Fastq.git \
@@ -111,11 +117,11 @@ RUN for i in \
        git clone ${i} gitclone && \
        mv gitclone/lib/* . && \
        rm -rf gitclone; \
-    done
+    done && \
+    chmod -R a+rwX $depDir
 
 WORKDIR /data
 
 RUN chmod -R a+rwX $reperDir
-RUN chmod -R a+rwX $depDir
 
 ENTRYPOINT ["reper"]
