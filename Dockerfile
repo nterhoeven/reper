@@ -39,6 +39,9 @@ RUN wget https://github.com/gmarcais/Jellyfish/releases/download/v2.2.6/jellyfis
     rm -rf jellyfish-2.2.6 jellyfish-2.2.6.tar.gz
 ENV LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 
+RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v2.3.2/bowtie2-2.3.2-linux-x86_64.zip && \
+    unzip bowtie2-2.3.2-linux-x86_64.zip
+
 RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
     tar xzf Trinity-v2.4.0.tar.gz && \
     cd trinityrnaseq-Trinity-v2.4.0 && \
@@ -48,9 +51,6 @@ ENV TRINITY_HOME="$depDir"/trinityrnaseq-Trinity-v2.4.0
 
 RUN wget https://github.com/weizhongli/cdhit/releases/download/V4.6.7/cd-hit-v4.6.7-2017-0501-Linux-binary.tar.gz && \
     tar xzf cd-hit-v4.6.7-2017-0501-Linux-binary.tar.gz
-
-RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v2.3.2/bowtie2-2.3.2-linux-x86_64.zip && \
-    unzip bowtie2-2.3.2-linux-x86_64.zip
 
 RUN wget https://github.com/samtools/samtools/releases/download/1.4.1/samtools-1.4.1.tar.bz2 && \
     tar xjf samtools-1.4.1.tar.bz2 && \
