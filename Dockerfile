@@ -1,6 +1,23 @@
 FROM ubuntu:16.04
 
-RUN apt-get update && apt-get -y dist-upgrade && apt-get -y install wget g++ build-essential unzip libncurses5-dev zlib1g-dev libbz2-dev liblzma-dev libtbb-dev git libipc-run-perl python emacs openjdk-8-jre icedtea-8-plugin bc
+RUN apt-get update && \
+    apt-get -y dist-upgrade && \
+    apt-get -y install \
+       wget \
+       g++ \
+       build-essential \
+       unzip \
+       libncurses5-dev \
+       zlib1g-dev \
+       libbz2-dev \
+       liblzma-dev \
+       libtbb-dev \
+       git \
+       libipc-run-perl \
+       python \
+       emacs \
+       openjdk-8-jre \
+       icedtea-8-plugin bc
 
 ENV reperDir /reper
 ENV depDir /dependencies
