@@ -82,6 +82,7 @@ RUN wget http://search.cpan.org/CPAN/authors/id/P/PL/PLICEASE/File-Which-1.22.ta
     cd File-Which-1.22 && \
     perl Makefile.PL && \
     make && \
+    make test && \
     make install
 
 RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Fastq.git && \
