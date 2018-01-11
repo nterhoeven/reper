@@ -72,6 +72,7 @@ RUN wget http://search.cpan.org/CPAN/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.
     cd Log-Log4perl-1.49 && \
     perl Makefile.PL && \
     make && \
+    make test && \
     make install
 
 RUN git clone https://github.com/BioInf-Wuerzburg/perl5lib-Fastq.git && \
