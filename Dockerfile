@@ -42,6 +42,7 @@ ENV LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 RUN wget https://github.com/BenLangmead/bowtie2/releases/download/v2.3.2/bowtie2-2.3.2-linux-x86_64.zip && \
     unzip bowtie2-2.3.2-linux-x86_64.zip && \
     rm bowtie2-2.3.2-linux-x86_64.zip
+ENV PATH="$depDir"/bowtie2-2.3.2:"$PATH"
 
 RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.tar.gz && \
     tar xzf Trinity-v2.4.0.tar.gz && \
