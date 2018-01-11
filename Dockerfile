@@ -14,7 +14,6 @@ RUN apt-get update && \
        git \
        libipc-run-perl \
        python \
-       emacs \
        openjdk-8-jre \
        icedtea-8-plugin \
        bc && \
