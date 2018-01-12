@@ -8,7 +8,21 @@
 
 
 ## read config
-source ./reper.conf
+# check if a reper.conf file exists in current directory
+CONFIGFILE="./reper.conf"
+if [ -e ${CONFIGFILE} ]
+then
+    echo "Using reper.conf from local directory">&2
+else
+    # no local config file exists, try to locate reper installation path
+    REPERINSTALLPATH=$(dirname "$0")
+    CONFIGFILE=${REPERINSTALLPATH}/reper.conf
+
+    echo "Using reper.conf from installation directory at ${REPERINSTALLPATH}">&2
+fi
+
+source ${CONFIGFILE}
+
 export reperDir
 ulimit -v "$maxMemoryKB"
 
