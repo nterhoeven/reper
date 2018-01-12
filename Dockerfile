@@ -79,6 +79,7 @@ RUN wget https://github.com/trinityrnaseq/trinityrnaseq/archive/Trinity-v2.4.0.t
     rm Trinity-v2.4.0.tar.gz
 
 ENV TRINITY_HOME="$depDir"/trinityrnaseq-Trinity-v2.4.0
+ENV PATH="$TRINITY_HOME":"$PATH"
 
 RUN git clone https://github.com/thackl/kmer-scripts.git
 
