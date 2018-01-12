@@ -5,6 +5,7 @@ RUN apt-get update && \
        wget \
        g++ \
        build-essential \
+       file \
        unzip \
        libncurses5-dev \
        zlib1g-dev \
