@@ -82,6 +82,7 @@ ENV TRINITY_HOME="$depDir"/trinityrnaseq-Trinity-v2.4.0
 ENV PATH="$TRINITY_HOME":"$PATH"
 
 RUN git clone https://github.com/thackl/kmer-scripts.git
+ENV PATH="$depDir"/kmer-scripts/bin/:"$PATH"
 
 WORKDIR $depDir/lib
 ENV PERL5LIB="$depDir/lib:$PERL5LIB"
