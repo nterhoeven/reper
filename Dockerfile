@@ -26,6 +26,7 @@ ENV depDir /dependencies
 WORKDIR $reperDir
 COPY reper .
 COPY reper.conf .
+COPY update_exe_path.sh .
 COPY scripts/ ./scripts/
 ENV PATH="$reperDir":$PATH
 
