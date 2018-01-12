@@ -1,3 +1,3 @@
 #!/bin/bash
-docker run --rm -v $(pwd):/data configure-refseq
-docker run --rm -v $(pwd):/data configure-REdat
+reper configure-refseq
+reper configure-REdat
