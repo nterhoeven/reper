@@ -8,4 +8,4 @@ sed -i '/^jellyfish=/   s#^\(jellyfish=\).*#\1'"$(which jellyfish)"'#;
         /^samtools=/    s#^\(samtools=\).*#\1'"$(which samtools)"'#;
         /^makeblastdb=/ s#^\(makeblastdb=\).*#\1'"$(which makeblastdb)"'#;
         /^blastn=/      s#^\(blastn=\).*#\1'"$(which blastn)"'#;
-        /^KmerFilter=/  s#^\(KmerFilter=\).*#\1'"$(which kmer-filter)"'#;' /reper/reper.conf
+        /^KmerFilter=/  s#^\(KmerFilter=\).*#\1'"$(which kmer-filter)"'#;' "$1"

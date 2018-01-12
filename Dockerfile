@@ -121,7 +121,7 @@ RUN for i in \
     done
 
 # update the path in reper.conf
-RUN /reper/update_exe_path.sh
+RUN /reper/update_exe_path.sh /reper/reper.conf
 
 WORKDIR /data
 
