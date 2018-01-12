@@ -118,6 +118,9 @@ RUN for i in \
        rm -rf gitclone; \
     done
 
+# update the path in reper.conf
+RUN /reper/update_exe_path.sh
+
 WORKDIR /data
 
 RUN chmod -R a+rwX $reperDir
