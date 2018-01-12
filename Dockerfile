@@ -15,8 +15,7 @@ RUN apt-get update && \
        git \
        libipc-run-perl \
        python \
-       openjdk-8-jre \
-       icedtea-8-plugin \
+       openjdk-8-jre-headless \
        bc && \
     rm -rf /var/lib/apt/lists/*
 
