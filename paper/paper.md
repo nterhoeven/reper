@@ -47,7 +47,7 @@ To address this challenge, we developed reper, a kmer based method to detect, cl
 in next generation sequencing (NGS) data without the need of a genome assembly.
 Our pipeline samples reads with high kmer coverage directly from the NGS dataset. The kmer counts areacquired using jellyfish [@marcais_fast_2011]. This subset is 
 assembled using the transcriptome assembler Trinity [@grabherr_full-length_2011], allowing reper to recover repeat variants at a high resolution.
-To create exemplar sequences of each repeat in the genome, the assembled repeats ar clustered using cd-hit [@li_cd-hit:_2006; @fu_cd-hit:_2012].
+To create exemplar sequences of each repeat in the genome, the assembled repeats are clustered using cd-hit [@li_cd-hit:_2006; @fu_cd-hit:_2012].
 These are further classified based on homology to known repeats using multiple blast [@camacho_blast] searches. Since reper was developed with
 a focus on plant data, the default classification libraries are REdat [@nussbaumer_mips_2012] for repeats, and refseq [@oleary_reference_2016] for chloroplast and mitochondrial
 sequences. The reference database, however, can easily be customized to the user's needs. A configuration script for
