@@ -45,7 +45,7 @@ characterization of their content and diversity solely based on an assembled gen
 
 To address this challenge, we developed reper, a kmer based method to detect, classify and quantify repeats
 in next generation sequencing (NGS) data without the need of a genome assembly.
-Our pipeline samples reads with high kmer coverage directly from the NGS dataset. The kmer counts areacquired using jellyfish [@marcais_fast_2011]. This subset is 
+Our pipeline samples reads with high kmer coverage directly from the NGS dataset. The kmer counts are acquired using jellyfish [@marcais_fast_2011]. This subset is 
 assembled using the transcriptome assembler Trinity [@grabherr_full-length_2011], allowing reper to recover repeat variants at a high resolution.
 To create exemplar sequences of each repeat in the genome, the assembled repeats are clustered using cd-hit [@li_cd-hit:_2006; @fu_cd-hit:_2012].
 These are further classified based on homology to known repeats using multiple blast [@camacho_blast] searches. Since reper was developed with
